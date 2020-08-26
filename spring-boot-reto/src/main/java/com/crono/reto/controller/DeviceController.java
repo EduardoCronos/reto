@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.crono.reto.entity.Device;
 import com.crono.reto.service.DeviceService;
+import com.crono.reto.validators.Validation;
 
 @RestController
 @RequestMapping("/devices")
@@ -21,6 +22,9 @@ public class DeviceController {
 
 	@Autowired
 	private DeviceService deviceService;
+	
+	@Autowired
+	private Validation validator;
 
 	@GetMapping
 	public ResponseEntity<List<Device>> getListDevices() {
@@ -45,7 +49,10 @@ public class DeviceController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Long> createProduct(@RequestBody Device device){
+	public ResponseEntity<Long> createDevice(@RequestBody Device device){
+		if (!validator.validateQR(device.getQrCode())) {
+			return ResponseEntity.notFound().build();
+		}
 		
 		Device deviceCreated = deviceService.createDevice(device);
 		

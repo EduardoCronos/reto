@@ -23,9 +23,9 @@ public class HubServiceImpl implements HubService {
 	}
 
 	@Override
-	public Hub getHubById(Long id) {
-		return hubRepository.findById(id).orElse(null);
-	}
+	public Hub getHubByMac(String macAddress) {
+		return hubRepository.getHubByMac(macAddress);
+	} 
 
 	@Override
 	public Hub createHub(Hub hub) {

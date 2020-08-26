@@ -6,6 +6,6 @@ import com.crono.reto.entity.Hub;
 
 public interface HubService {
 	public List<Hub> listAllHubs();
-	public Hub getHubById(Long id);
+	public Hub getHubByMac(String id);
 	public Hub createHub(Hub hub);
 }
